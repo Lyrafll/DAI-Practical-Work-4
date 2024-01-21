@@ -24,7 +24,8 @@ public class Main {
         app.get("/drinks", drinkController::getAll);
         app.get("/drinks/{id}", drinkController::getOne);
         app.post("/drinks", drinkController::create);
-        app.delete("/drinks", ctx -> ctx.result("Hello, world!"));
+        app.delete("/drinks/{id}", drinkController::delete);
+        app.put("/drinks/{id}", drinkController::update);
 
 
         app.start(PORT);

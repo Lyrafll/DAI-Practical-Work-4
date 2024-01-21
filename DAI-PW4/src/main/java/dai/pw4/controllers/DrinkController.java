@@ -34,6 +34,34 @@ public class DrinkController {
         ctx.json(drink);
     }
 
+    public void delete(Context ctx) {
+        Integer id = ctx.pathParamAsClass("id", Integer.class)
+                .check(userId -> drinks.get(userId) != null, "Drink not found")
+                .getOrThrow(message -> new NotFoundResponse());
+        drinks.remove(id);
+
+        ctx.status(HttpStatus.NO_CONTENT);
+    }
+
+    public void update(Context ctx) {
+
+        Integer id = ctx.pathParamAsClass("id", Integer.class)
+                .check(userId -> drinks.get(userId) != null, "Drink not found")
+                .getOrThrow(message -> new NotFoundResponse());
+
+        Drink newDrink = ctx.bodyValidator(Drink.class)
+                .check(obj -> obj.name != null, "Missing name")
+                .check(obj -> obj.price != null, "Missing price")
+                .get();
+
+        Drink drink = drinks.get(id);
+
+        drink.name = newDrink.name;
+        drink.price = newDrink.price;
+
+        ctx.status(HttpStatus.NO_CONTENT);
+    }
+
     public void getOne(Context ctx) {
         Integer id = ctx.pathParamAsClass("id", Integer.class)
                 .check(userId -> drinks.get(userId) != null, "Drink not found")
@@ -43,7 +71,6 @@ public class DrinkController {
 
         ctx.json(drink);
     }
-
     public void getAll(Context ctx) {
         ctx.json(this.drinks);
     }

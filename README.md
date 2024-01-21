@@ -20,3 +20,14 @@ To get drink by its id you can access
 ```html
 http://localhost:8080/drinks/{id}
 ```
+
+To update a drink by its id
+```cmd
+curl -i -X PUT -H "Content-Type: application/json" -d "{\"name\":\"Coca
+\", \"price\":\"3.60\"}" http://localhost:8080/drinks/{id}
+```
+
+To delete a drink by its id
+```cmd
+curl -i -X DELETE http://localhost:8080/drinks/{id}
+```
