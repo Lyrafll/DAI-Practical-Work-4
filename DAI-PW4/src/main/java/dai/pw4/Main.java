@@ -2,7 +2,9 @@ package dai.pw4;
 
 import dai.pw4.controllers.DrinkController;
 import dai.pw4.controllers.AuthController;
+import dai.pw4.controllers.TableController;
 import dai.pw4.models.Drink;
+import dai.pw4.models.Table;
 
 import io.javalin.Javalin;
 
@@ -17,10 +19,20 @@ public class Main {
         ConcurrentHashMap<Integer, Drink> drinks = new ConcurrentHashMap<>();
 
         ConcurrentHashMap<String, String> managerCredentials = new ConcurrentHashMap<>();
+        ConcurrentHashMap<Integer, Table> tables = new ConcurrentHashMap<>();
+        Table table10 = new Table();
+        table10.id = 10;
+        table10.seats = 6;
+        table10.available = true;
+        tables.put(table10.id, table10);
 
 
         AuthController authController = new AuthController(managerCredentials);
+        TableController tableController = new TableController(authController, tables);
         DrinkController drinkController = new DrinkController(authController, drinks);
+
+        // Introduction on how to navigate/use the api
+        app.get("/", ctx -> ctx.result("Welcome in our bar!"));
 
         // Auth routes
         app.post("/login", authController::login);
@@ -29,8 +41,12 @@ public class Main {
         app.get("/managers", authController::listManager);
         app.delete("/managers/{username}", authController::deleteManager);
 
-        // Introduction on how to navigate/use the api
-        app.get("/", ctx -> ctx.result("Welcome in our bar!"));
+        // Table routes
+        app.get("/tables", tableController::getAll);
+        app.post("/tables", tableController::create);
+        app.delete("/tables/{id}", tableController::delete);
+        app.get("/tables/{id}", tableController::select);
+
 
         // Drink routes
         app.get("/drinks", drinkController::getAll);

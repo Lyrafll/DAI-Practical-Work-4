@@ -21,6 +21,10 @@ public class DrinkController {
     }
 
     public void create(Context ctx) {
+        String sessionToken = ctx.cookie("sessionToken");
+        if(!authController.isValidSession(sessionToken)){
+            throw new UnauthorizedResponse("sessionToken not valid.\n");
+        }
         Drink newDrink = ctx.bodyValidator(Drink.class)
                 .check(obj -> obj.name != null, "Missing name")
                 .check(obj -> obj.price != null, "Missing price")
@@ -39,6 +43,10 @@ public class DrinkController {
     }
 
     public void delete(Context ctx) {
+        String sessionToken = ctx.cookie("sessionToken");
+        if(!authController.isValidSession(sessionToken)){
+            throw new UnauthorizedResponse("sessionToken not valid.\n");
+        }
         Integer id = ctx.pathParamAsClass("id", Integer.class)
                 .check(userId -> drinks.get(userId) != null, "Drink not found")
                 .getOrThrow(message -> new NotFoundResponse());
@@ -48,7 +56,10 @@ public class DrinkController {
     }
 
     public void update(Context ctx) {
-
+        String sessionToken = ctx.cookie("sessionToken");
+        if(!authController.isValidSession(sessionToken)){
+            throw new UnauthorizedResponse("sessionToken not valid.\n");
+        }
         Integer id = ctx.pathParamAsClass("id", Integer.class)
                 .check(userId -> drinks.get(userId) != null, "Drink not found")
                 .getOrThrow(message -> new NotFoundResponse());
