@@ -1,5 +1,6 @@
 package dai.pw4.controllers;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dai.pw4.models.Cart;
@@ -46,6 +47,6 @@ public class CartController {
 
     public void get(Context ctx) {
         ctx.status(HttpStatus.OK);
-        ctx.json(this.cart);
+        ctx.json(new Gson().toJson(this.cart));
     }
 }

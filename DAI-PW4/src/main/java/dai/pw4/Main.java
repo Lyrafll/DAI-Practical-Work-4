@@ -32,7 +32,7 @@ public class Main {
         // Cart routes
         app.get("/cart", cartController::get);
         app.post("/cart", cartController::add);
-        app.delete("/cart", cartController::remove);
+        app.delete("/cart/{id}", cartController::remove);
 
 
         app.start(PORT);
