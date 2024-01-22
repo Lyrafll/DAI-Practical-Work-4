@@ -1,6 +1,7 @@
 package dai.pw4.controllers;
 
 import dai.pw4.models.Drink;
+import dai.pw4.controllers.AuthController;
 import io.javalin.http.*;
 
 import java.util.ArrayList;
@@ -12,7 +13,10 @@ public class DrinkController {
     private final ConcurrentHashMap<Integer, Drink> drinks;
     private final AtomicInteger drinkId = new AtomicInteger();
 
-    public DrinkController(ConcurrentHashMap<Integer, Drink> drinks) {
+    private AuthController authController;
+
+    public DrinkController(AuthController authController, ConcurrentHashMap<Integer, Drink> drinks) {
+        this.authController = authController;
         this.drinks = drinks;
     }
 
