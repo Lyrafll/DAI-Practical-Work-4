@@ -1,7 +1,6 @@
 package dai.pw4;
 
 import dai.pw4.controllers.DrinkController;
-import dai.pw4.controllers.UsersController;
 import dai.pw4.controllers.AuthController;
 import dai.pw4.models.Drink;
 
@@ -16,16 +15,12 @@ public class Main {
         Javalin app = Javalin.create();
 
         ConcurrentHashMap<Integer, Drink> drinks = new ConcurrentHashMap<>();
+
         ConcurrentHashMap<String, String> managerCredentials = new ConcurrentHashMap<>();
 
 
         AuthController authController = new AuthController(managerCredentials);
-        managerCredentials.put("admin", authController.hashPassword("root"));
-
-        //UsersController managerCredentials = new UsersController(users);
-
         DrinkController drinkController = new DrinkController(authController, drinks);
-
 
         // Auth routes
         app.post("/login", authController::login);
@@ -33,14 +28,6 @@ public class Main {
         app.post("/managers", authController::createManager);
         app.get("/managers", authController::listManager);
         app.delete("/managers/{username}", authController::deleteManager);
-
-        // Users routes
-        /*
-        app.get("/users", managerCredentials::getMany);
-        app.get("/users/{id}", managerCredentials::getOne);
-        app.put("/users/{id}", managerCredentials::update);
-        app.delete("/users/{id}", managerCredentials::delete);
-        */
 
         // Introduction on how to navigate/use the api
         app.get("/", ctx -> ctx.result("Welcome in our bar!"));
