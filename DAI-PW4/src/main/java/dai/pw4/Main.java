@@ -1,5 +1,6 @@
 package dai.pw4;
 
+import dai.pw4.controllers.CartController;
 import dai.pw4.controllers.DrinkController;
 import dai.pw4.models.Drink;
 import io.javalin.Javalin;
@@ -15,6 +16,7 @@ public class Main {
         ConcurrentHashMap<Integer, Drink> drinks = new ConcurrentHashMap<>();
 
         DrinkController drinkController = new DrinkController(drinks);
+        CartController cartController = new CartController(drinks);
 
 
         // Introduction on how to navigate/use the api
@@ -26,6 +28,11 @@ public class Main {
         app.post("/drinks", drinkController::create);
         app.delete("/drinks/{id}", drinkController::delete);
         app.put("/drinks/{id}", drinkController::update);
+
+        // Cart routes
+        app.get("/cart", cartController::get);
+        app.post("/cart", cartController::add);
+        app.delete("/cart", cartController::remove);
 
 
         app.start(PORT);
