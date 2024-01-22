@@ -56,8 +56,8 @@ sudo reboot
 # Clone repository on the virtual machine
 git clone https://github.com/Lyrafll/DAI-Practical-Work-4.git
 
-# Navigate into Traefik directorie
-cd traefik-secure
+# Navigate into Traefik directory
+cd DAI-Practical-Work-4/traefik-secure
 
 # Modify environement variable
 vi .env
@@ -65,15 +65,14 @@ vi .env
 # Create the secrets directory
 mkdir secrets
 
-# Create the auth-users.txt file 
+# Create the auth-users.txt file with admin user
 htpasswd -c secrets/auth-users.txt admin
 
 # Start Traefik (reverse proxy)
 docker compose up -d
 
 # Navigate into Drink-Manager directorie
-cd ..
-cd DAI-PW4
+cd ../DAI-PW4
 
 # Build the jar localy
 ./mvnw package

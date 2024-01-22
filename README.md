@@ -3,7 +3,7 @@
 
 The Drink Manager API is a web service designed for managing a database of drinks. It operates on HTTP port 8080. This API follows the CRUD (Create, Read, Update, Delete) pattern, offering endpoints to create, retrieve, update, or delete drinks. You can also place an order. This tool is particularly useful if you need to manage a dynamic drink inventory and order as you would in a bar or restaurant.
 
-So as not to pollute the readme, the API interaction are in the [API](docs/API.md) section, you can also see command used to deploy the server in the [Server configuration](docs/serverConfig.md) section and you also find how to configure DNS zone in [DNS](docs/API.md) section.
+So as not to pollute the readme, the API interaction are in the [API](docs/API.md) section, you can also see command used to deploy the server in the [Server configuration](docs/serverConfig.md) section and you also find how to configure DNS zone in [DNS](docs/DNS.md) section.
 
 
 
