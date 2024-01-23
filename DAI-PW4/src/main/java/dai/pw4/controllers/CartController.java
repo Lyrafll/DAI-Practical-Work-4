@@ -10,15 +10,20 @@ import io.javalin.http.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class CartController {
-    private Cart cart;
     private final ConcurrentHashMap<Integer, Drink> drinks;
+    private final ConcurrentHashMap<String, Cart> carts;
 
     public CartController(ConcurrentHashMap<Integer, Drink> drinks) {
         this.drinks = drinks;
-        this.cart = new Cart();
+        this.carts = new ConcurrentHashMap<>();
     }
 
     public void add(Context ctx) {
+        String tableId = ctx.cookie("tableId");
+        if(tableId == null){
+            throw new UnauthorizedResponse("no tableId");
+        }
+
         JsonObject requestBody = new JsonParser().parse(ctx.body()).getAsJsonObject();
 
         if (!requestBody.has("drinkId") || !requestBody.has("quantity")) {
@@ -32,21 +37,46 @@ public class CartController {
             return;
         }
 
-        this.cart.add(drink, requestBody.get("quantity").getAsInt());
-
-        ctx.status(HttpStatus.NO_CONTENT);
+        if(!carts.containsKey(tableId)){
+            Cart cart = new Cart();
+            cart.add(drink, requestBody.get("quantity").getAsInt());
+            carts.put(tableId, cart);
+        } else {
+            carts.get(tableId).add(drink, requestBody.get("quantity").getAsInt());
+        }
+        //ctx.json(carts.get(tableId));
+        ctx.status(HttpStatus.OK);
     }
 
     public void remove(Context ctx) {
+        String tableId = ctx.cookie("tableId");
+        if(tableId == null){
+            throw new UnauthorizedResponse("no tableId");
+        }
         Integer drinkId = ctx.pathParamAsClass("id", Integer.class)
                 .check(userId -> drinks.get(userId) != null, "Drink not found")
                 .getOrThrow(message -> new NotFoundResponse());
-        this.cart.remove(drinks.get(drinkId));
-        ctx.status(HttpStatus.NO_CONTENT);
+
+        if(!carts.containsKey(tableId)){
+            throw new NoContentResponse();
+        } else{
+            carts.get(tableId).remove(drinks.get(drinkId));
+        }
+
+        ctx.status(HttpStatus.OK);
     }
 
     public void get(Context ctx) {
+        String tableId = ctx.cookie("tableId");
+        if(tableId == null){
+            throw new UnauthorizedResponse("no tableId");
+        }
+
+        if(!carts.containsKey(tableId)){
+            throw new NoContentResponse();
+        }
+
         ctx.status(HttpStatus.OK);
-        ctx.json(new Gson().toJson(this.cart));
+        ctx.json(new Gson().toJson(carts.get(tableId)));
     }
 }

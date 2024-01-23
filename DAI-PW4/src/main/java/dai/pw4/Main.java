@@ -1,10 +1,12 @@
 package dai.pw4;
 
-import dai.pw4.controllers.DrinkController;
 import dai.pw4.controllers.AuthController;
+import dai.pw4.controllers.CartController;
+import dai.pw4.controllers.DrinkController;
 import dai.pw4.controllers.TableController;
 import dai.pw4.models.Drink;
 import dai.pw4.models.Table;
+import java.util.Optional;
 
 import io.javalin.Javalin;
 
@@ -17,6 +19,11 @@ public class Main {
         Javalin app = Javalin.create();
 
         ConcurrentHashMap<Integer, Drink> drinks = new ConcurrentHashMap<>();
+        Drink drink1 = new Drink();
+        drink1.id = 42;
+        drink1.name = "Cola";
+        drink1.price = 5.8;
+        drinks.put(drink1.id, drink1);
 
         ConcurrentHashMap<String, String> managerCredentials = new ConcurrentHashMap<>();
         ConcurrentHashMap<Integer, Table> tables = new ConcurrentHashMap<>();
@@ -30,6 +37,7 @@ public class Main {
         AuthController authController = new AuthController(managerCredentials);
         TableController tableController = new TableController(authController, tables);
         DrinkController drinkController = new DrinkController(authController, drinks);
+        CartController cartController = new CartController(drinks);
 
         // Introduction on how to navigate/use the api
         app.get("/", ctx -> ctx.result("Welcome in our bar!"));
@@ -45,8 +53,8 @@ public class Main {
         app.get("/tables", tableController::getAll);
         app.post("/tables", tableController::create);
         app.delete("/tables/{id}", tableController::delete);
-        app.get("/tables/{id}", tableController::select);
-
+        app.get("/setTable/{id}", tableController::select);
+        app.get("/clearTable", tableController::unselect);
 
         // Drink routes
         app.get("/drinks", drinkController::getAll);
@@ -54,6 +62,13 @@ public class Main {
         app.post("/drinks", drinkController::create);
         app.delete("/drinks/{id}", drinkController::delete);
         app.put("/drinks/{id}", drinkController::update);
+
+        // Cart routes
+        app.get("/cart", cartController::get);
+        app.post("/cart", cartController::add);
+        app.delete("/cart/{id}", cartController::remove);
+
+
 
 
         app.start(PORT);

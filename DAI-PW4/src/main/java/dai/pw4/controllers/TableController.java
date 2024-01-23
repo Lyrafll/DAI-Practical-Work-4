@@ -65,6 +65,11 @@ public class TableController {
         ctx.status(HttpStatus.OK);
     }
 
+    public void unselect(Context ctx) {
+        ctx.removeCookie("tableId");
+        ctx.status(HttpStatus.OK);
+    }
+
     public void getAll(Context ctx) {
         ctx.json(tables.values());
     }
