@@ -64,6 +64,8 @@ Quick cheatsheet of commands, for more details check out [API](docs/API.md) !
 
 ### Drinks endpoint
 
+---
+
 To **create** a drink
 
 ```json
@@ -110,6 +112,7 @@ curl https://localhost/drinks/{id}
 ```
 
 ### Cart endpoint
+---
 
 To **add** a drink to cart
 
