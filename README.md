@@ -37,7 +37,7 @@ docker build -t dai-pw4 .
 
 Tagging the Image
 ```cmd
-docker tag dai-pw4 docker pull ghcr.io/apirakas/dai-pw4
+docker tag pw4  ghcr.io/apirakas/pw4
 ```
 
 Publish the image on GitHub Container Registry

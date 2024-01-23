@@ -4,7 +4,7 @@ networks:
 
 services:
   dai-pw4:
-    image: dai-pw4
+    image: ghcr.io/apirakas/dai-pw4
     networks:
       - traefik
     expose:
