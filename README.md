@@ -58,64 +58,12 @@ docker pull ghcr.io/apirakas/dai-pw4:latest
 ```
 
 
-
-## Usage
-
-### Drinks endpoint
-
-To **create** a drink
-
-```json
-curl -i -X POST -H "Content-Type: application/json" -d 
-    "{
-    \"name\":\"Sprite\", 
-    \"price\":\"3.60\"
-    }" 
-    https://localhost/drinks
-```
-
-To **update** a drink by its id
-```json
-curl -i -X PUT -H "Content-Type: application/json" -d 
-    "{
-    \"name\":\"Coca\", 
-    \"price\":\"3.60\"
-    }" 
-    https://localhost/drinks/{id}
-```
-
-To **delete** a drink by its id
-```cmf
-curl -i -X DELETE https://localhost/drinks/{id}
-```
-
-To **get** all the drinks you can access 
-```cmf
-https://localhost/drinks 
-```
-or
-```cmd
-curl https://localhost/drinks
-```
-
-To **get drink by its id** you can access
-
-```html
-https://localhost/drinks/{id}
-```
-or
-```cmd
-curl https://localhost/drinks/{id}
-```
-
-
-
 ## Group composition and roles for each member
 
 |                     Members                      | Code | Documentation | Infrastructure | Communication | Test | Presentation |
 | :----------------------------------------------: | :--: | :-----------: | :------------: | :-----------: | :--: | :----------: |
 |   [@apirakas](https://www.github.com/apirakas)   |      |       x       |       x        |               |      |      x       |
-| [@HumairRomain](https://github.com/HumairRomain) |  x   |               |                |               |  x   |      x       |
+| [@HumairRomain](https://github.com/HumairRomain) |  x   |       x       |                |               |  x   |      x       |
 | [@lucaslattion](https://github.com/lucaslattion) |      |               |                |       x       |  x   |      x       |
 |    [@Lyrafll](https://www.github.com/Lyrafll)    |  x   |       x       |                |               |      |      x       |
 
