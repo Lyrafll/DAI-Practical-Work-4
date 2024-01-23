@@ -29,6 +29,16 @@ The request body must contain a JSON object with the following properties:
 - `name` - name of the drink
 - `price` - price of the drink
 
+#### Example query
+```json
+curl -i -X POST -H "Content-Type: application/json" -d 
+    "{
+    \"name\":\"Sprite\", 
+    \"price\":\"3.60\"
+    }" 
+    http://localhost:8080/drinks
+```
+
 #### Response
 
 The response body contains a JSON object with the following properties:
@@ -53,6 +63,12 @@ Get all drinks.
 
 The request doesn't contain a parameter.
 
+#### Example usage
+To get a list of all the drinks you can access/call 
+```html
+http://localhost:8080/drinks
+```
+
 #### Response
 
 The response body contains a JSON array with the following properties:
@@ -74,6 +90,12 @@ Get one drink by its ID.
 #### Request
 
 The request path must contain the ID of the drink.
+
+#### Example usage
+To get a drink by its id you can access/call, where {id} is the id of the desired drink
+```html
+http://localhost:8080/drinks/{id}
+```
 
 #### Response
 
@@ -103,6 +125,16 @@ The request body must contain a JSON object with the following properties:
 - `name` - The name of the drink
 - `price` - The price of the drink
 
+#### Example query
+```json
+curl -i -X PUT -H "Content-Type: application/json" -d 
+    "{
+    \"name\":\"Coca\", 
+    \"price\":\"3.60\"
+    }" 
+    http://localhost:8080/drinks/{id}
+```
+
 #### Response
 
 The response body contains a JSON object with the following properties:
@@ -126,6 +158,12 @@ Delete a drink by its ID.
 #### Request
 
 The request path must contain the ID of the drink.
+
+#### Example query
+To delete a drink by its id
+```cmd
+curl -i -X DELETE http://localhost:8080/drinks/{id}
+```
 
 #### Response
 
