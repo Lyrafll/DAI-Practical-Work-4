@@ -1,5 +1,11 @@
 # Drink Manager - Domain Name Server
 
+Hostname: IICT-MV366-DAI
+DNS:  dai-pw4.ddns.net
+IP interne : 10.190.132.66
+IP externe : 185.144.38.66
+
+
 Create an account on this website https://my.noip.com/
 
 We will create a subdomain on this website configure it as you like. Here's some information to complete it.

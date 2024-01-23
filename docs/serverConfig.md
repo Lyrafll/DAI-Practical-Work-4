@@ -12,9 +12,6 @@ sudo apt upgrade
 # Install apache2-utils
 sudo apt install apache2-util
 
-# Install JDK-17
-sudo apt install openjdk-17-jdk
-
 # Add Docker's official GPG key
 sudo apt-get install ca-certificates curl gnupg
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -74,11 +71,13 @@ docker compose up -d
 # Navigate into Drink-Manager directorie
 cd ../DAI-PW4
 
+# Only if you want local build
+# Install JDK-17
+# sudo apt install openjdk-17-jdk
 # Build the jar localy
-./mvnw package
-
+# ./mvnw package
 # Build docker
-docker build -t dai-pw4 .
+# docker build -t dai-pw4 .
 
 # Modify environement variable
 vi .env

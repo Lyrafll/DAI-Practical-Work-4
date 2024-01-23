@@ -1,3 +1,7 @@
+Copied from this [repo](https://github.com/heig-vd-dai-course/heig-vd-dai-course-code-examples/tree/main/23-practical-work-4/traefik-secure)
+
+
+
 # Traefik secure
 
 This [Traefik](https://traefik.io/traefik/) example shows how to use Traefik on
