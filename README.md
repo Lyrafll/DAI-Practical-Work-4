@@ -60,6 +60,7 @@ docker pull ghcr.io/apirakas/dai-pw4:latest
 
 
 ## Usage
+Quick cheatsheet of commands, for more details check out [API](docs/API.md) !
 
 ### Drinks endpoint
 
@@ -108,6 +109,32 @@ or
 curl https://localhost/drinks/{id}
 ```
 
+### Cart endpoint
+
+To **add** a drink to cart
+
+```json
+curl -i -X POST -H "Content-Type: application/json" -d 
+    "{
+    \"drinkId\":\"2\", 
+    \"quantity\":\"3\"
+    }" 
+    https://localhost:8080/cart
+```
+
+To **remove** a drink by its id from cart
+```cmf
+curl -i -X DELETE https://localhost/cart/{id}
+```
+
+To **get** the list of items in cart
+```cmf
+https://localhost/cart 
+```
+or
+```cmd
+curl https://localhost/cart
+```
 
 
 ## Group composition and roles for each member

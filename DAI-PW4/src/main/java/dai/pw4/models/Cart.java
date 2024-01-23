@@ -9,40 +9,40 @@ public class Cart {
 
     }
 
-    static class Item<F, S> {
-        F first;
-        S second;
+    static class Item<Drink, Integer> {
+        Drink drink;
+        Integer quantity;
 
-        public Item(F first, S second){
-            this.first = first;
-            this.second = second;
+        public Item(Drink first, Integer second){
+            this.drink = first;
+            this.quantity = second;
         }
 
-        public F getFirst() {
-            return first;
+        public Drink getDrink() {
+            return drink;
         }
 
-        public S getSecond() {
-            return second;
+        public Integer getQuantity() {
+            return quantity;
         }
 
-        public void setSecond(S second){
-            this.second = second;
+        public void setQuantity(Integer quantity){
+            this.quantity = quantity;
         }
     }
 
     public void add(Drink drink, Integer amount){
-        drinks.stream().filter(e -> e.getFirst().equals(drink))
+        drinks.stream().filter(e -> e.getDrink().equals(drink))
                         .findFirst()
                         .ifPresentOrElse(pair -> {
-                            pair.setSecond(pair.getSecond() + amount);
+                            pair.setQuantity(pair.getQuantity() + amount);
                         },
                                 () -> drinks.add(new Item<>(drink, amount))
                         );
     }
 
     public void remove(Drink drink){
-        drinks.stream().filter(e -> e.getFirst().equals(drink))
+        drinks.stream().filter(e -> e.getDrink().equals(drink))
                 .findFirst()
                 .ifPresent(
                         drinkIntegerPair -> {
