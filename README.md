@@ -61,27 +61,36 @@ docker pull ghcr.io/apirakas/dai-pw4:latest
 
 ## Usage
 
-Small CRUD API to manage drinks
+### Drinks endpoint
 
 To **create** a drink
 
-```cmd
-curl -i -X POST -H "Content-Type: application/json" -d "{\"name\":\"Sprite\", \"price\":\"3.60\"}" https://localhost/drinks
+```json
+curl -i -X POST -H "Content-Type: application/json" -d 
+    "{
+    \"name\":\"Sprite\", 
+    \"price\":\"3.60\"
+    }" 
+    https://localhost/drinks
 ```
 
 To **update** a drink by its id
-```cmd
-curl -i -X PUT -H "Content-Type: application/json" -d "{\"name\":\"Coca
-\", \"price\":\"3.60\"}" https://localhost/drinks/{id}
+```json
+curl -i -X PUT -H "Content-Type: application/json" -d 
+    "{
+    \"name\":\"Coca\", 
+    \"price\":\"3.60\"
+    }" 
+    https://localhost/drinks/{id}
 ```
 
 To **delete** a drink by its id
-```cmd
+```cmf
 curl -i -X DELETE https://localhost/drinks/{id}
 ```
 
 To **get** all the drinks you can access 
-```html
+```cmf
 https://localhost/drinks 
 ```
 or
