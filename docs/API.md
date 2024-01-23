@@ -331,6 +331,8 @@ The request body must contain a JSON object with the following properties:
 - `name` - name of the drink
 - `price` - price of the drink
 
+The request body must contain a valid `sessionToken` Cookie
+
 #### Response
 
 The response body contains a JSON object with the following properties:
@@ -343,6 +345,7 @@ The response body contains a JSON object with the following properties:
 
 - `201` (Created) - The drink has been successfully created
 - `400` (Bad Request) - The request body is invalid
+- `401` (Unauthorized) - invalide sessionToken
 - `409` (Conflict) - The drink already exists
 
 
@@ -414,6 +417,8 @@ The request body must contain a JSON object with the following properties:
 - `name` - The name of the drink
 - `price` - The price of the drink
 
+The request body must contain a valid `sessionToken` Cookie
+
 #### Response
 
 The response body contains a JSON object with the following properties:
@@ -426,6 +431,7 @@ The response body contains a JSON object with the following properties:
 
 - `200` (OK) - The drink has been successfully updated
 - `400` (Bad Request) - The request body is invalid
+- `401` (Unauthorized) - invalide sessionToken
 - `404` (Not Found) - The drink does not exist
 
 
@@ -441,6 +447,8 @@ Delete a drink by its ID.
 
 The request path must contain the ID of the drink.
 
+The request body must contain a valid `sessionToken` Cookie
+
 #### Response
 
 The response body is empty.
@@ -448,4 +456,5 @@ The response body is empty.
 #### Status codes
 
 - `204` (No Content) - The drink has been successfully deleted
+- `401` (Unauthorized) - invalide sessionToken
 - `404` (Not Found) - The drink does not exist
