@@ -37,7 +37,7 @@ docker build -t dai-pw4 .
 
 Tagging the Image
 ```cmd
-docker tag dai-pw4 docker pull ghcr.io/apirakas/dai-pw4
+docker tag pw4  ghcr.io/apirakas/pw4
 ```
 
 Publish the image on GitHub Container Registry
@@ -129,3 +129,4 @@ We noticed that javalin had a vulnerability with version 5.6.3 due to a depandan
 When we launch a site in https, it's a good idea to check that our server's configuration (which versions of tls, cipher suites, handshake, etc.) is correct. To get a quick answer, we can run a check with the following site [Qualys](https://www.ssllabs.com/ssltest/). 
 
 <img src="./img/tls.png" alt="tls">
+

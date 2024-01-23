@@ -3,26 +3,26 @@ networks:
     external: true
 
 services:
-  crud-drinks:
-    image: dai-pw4
+  dai-pw4:
+    image: ghcr.io/apirakas/dai-pw4
     networks:
       - traefik
     expose:
-      - 80
+      - 8080
     labels:
       ## Traefik
       - traefik.enable=true
       - traefik.docker.network=traefik
       ## HTTP
-      - traefik.http.routers.whoami-http.entrypoints=http
-      - traefik.http.routers.whoami-http.rule=Host(`${PW4_FULLY_QUALIFIED_DOMAIN_NAME}`)
+      - traefik.http.routers.dai-pw4-http.entrypoints=http
+      - traefik.http.routers.dai-pw4-http.rule=Host(`${PW4_FULLY_QUALIFIED_DOMAIN_NAME}`)
       # We add a middleware to redirect HTTP to HTTPS
-      - traefik.http.routers.whoami-http.middlewares=redirect-to-https
+      - traefik.http.routers.dai-pw4-http.middlewares=redirect-to-https
       ## HTTPS
       # We add the HTTPS configuration
-      - traefik.http.routers.whoami-https.entrypoints=https
-      - traefik.http.routers.whoami-https.rule=Host(`${PW4_FULLY_QUALIFIED_DOMAIN_NAME}`)
-      - traefik.http.routers.whoami-https.tls=true
-      - traefik.http.routers.whoami-https.tls.certresolver=letsencrypt
+      - traefik.http.routers.dai-pw4-https.entrypoints=https
+      - traefik.http.routers.dai-pw4-https.rule=Host(`${PW4_FULLY_QUALIFIED_DOMAIN_NAME}`)
+      - traefik.http.routers.dai-pw4-https.tls=true
+      - traefik.http.routers.dai-pw4-https.tls.certresolver=letsencrypt
 
 
